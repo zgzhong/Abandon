@@ -112,6 +112,10 @@ alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 
+# vps aliases
+alias vps4="ssh root@23.106.155.11 -p 28059"
+alias vps6="ssh root@2607:8700:110:1311:: -p 28059"
+ 
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
 
