@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  postgresql:
+    image: sameersbn/postgresql
+    environment:
+      - DB_USER=gitlab
+      - DB_PASS=password
+      - DB_NAME=gitlabhq_production
+  
+  redis:
+    image: redis
+  
+  gitlab:
+    image: sameersbn/gitlab
+    links:
+      - redis:redisio
+      - postgresql:postgresql
+    ports:
+      - "10080:80"
+      - "10022:22"
+    environment:
+      - GITLAB_PORT=10080
+      - GITLAB_SSH_PORT=10022
+      - GITLAB_SCRETES_DB_KEY_BASE=long-and-random-alphanumeric-string
