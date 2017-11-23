@@ -33,6 +33,14 @@ class RmTestCase(unittest.TestCase):
 
 
 class PropertyClassTest(unittest.TestCase):
+
+    @mock.patch("mymodule.PropertyClass.prop", new_callable=mock.PropertyMock)
+    def test_prop_mock(self, mock_status_code):
+        mock_status_code.return_value = 200
+        status_code = get_status_code()
+        self.assertEqual(status_code, 200)
+        print(get_status_code())
+
     def test_prop_mock(self):
         with mock.patch("mymodule.PropertyClass.prop", new_callable=mock.PropertyMock) as prop_moc:
             prop_moc.return_value = 200
