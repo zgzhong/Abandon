@@ -6,5 +6,5 @@ import time
 
 @app.task
 def visit_url(url):
-    req = requests.get(url)
+    req = requests.head(url)
     return req.status_code
