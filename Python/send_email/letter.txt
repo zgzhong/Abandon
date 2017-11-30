@@ -1,0 +1,6 @@
+Dear Me:
+   On 2017-11-30, I spent some time, about a whole afternoon, reading the Python documentation with the perpose to accomplish the project of professor Lv.
+   If you receive this letter, you should be happy because I can send out a email using Python programming language.
+
+Yours sincelery.
+Me
