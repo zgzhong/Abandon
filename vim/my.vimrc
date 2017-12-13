@@ -3,13 +3,13 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 " vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end()之间
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/phd'
+Plugin 'VundleVim/Vundle.vim'               " vundle插件
+Plugin 'altercation/vim-colors-solarized'   " solarized 主题
+Plugin 'tomasr/molokai'                     " molokai 主题
+Plugin 'vim-scripts/phd'                    " phd 主题
 Plugin 'Lokaltog/vim-powerline'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'octol/vim-cpp-enhanced-highlight'   
+Plugin 'nathanaelkane/vim-indent-guides'    " 对齐线插件 
 Plugin 'derekwyatt/vim-fswitch'
 Plugin 'kshenoy/vim-signature'
 Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines'
@@ -50,7 +50,16 @@ nmap <Leader>q :q<cr>
 nmap <Leader>w :w<cr>
 " 定义快捷键保存所有窗口内容并退出vim
 nmap <Leader>WQ :wa<cr>:q<cr>
-
+" 跳转至右方的窗口
+nnoremap <C-l> <C-W>l
+" 跳转至左方的窗口
+nnoremap <C-h> <C-W>h
+" 跳转至上方的子窗口
+nnoremap <C-k> <C-W>k
+" 跳转至下方的子窗口
+nnoremap <C-j> <C-W>j 
+" 定义快捷键在结对符之间跳转
+nmap <Leader><Space> %
 " *******************************
 
 " ************UI 配置************
@@ -119,9 +128,9 @@ set nofoldenable
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边 
 let tagbar_left=1 
 " 设置显示／隐藏标签列表子窗口的快捷键。速记：tag list
-nnoremap <Leader>tl :TagbarToggle<CR> 
+nnoremap <silent> <Leader>tl :TagbarToggle<CR> 
 " 设置标签子窗口的宽度 
-let tagbar_width=20
+let tagbar_width=16
 " tagbar 子窗口中不显示冗余帮助信息 
 let g:tagbar_compact=1
 " 设置 ctags 对哪些代码标识符生成标签
@@ -160,5 +169,52 @@ let g:tagbar_type_cpp = {
 \ }
 " *****************************
 
-" todo: 配置到4.7
-"
+" 忽略基于标签的声明定义跳转 
+
+" ********* YCM 配置 *********
+" 跳转到声明 jdl 表示jump decleration
+nnoremap <leader>dl :YcmCompleter GoToDeclaration<CR>
+" 跳转到定义 jdf 表示jump definition  只能是 #include 或已打开的文件 
+nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+" 补全功能在注释中同样有效
+let g:ycm_complete_in_comments=1
+" 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示
+let g:ycm_confirm_extra_conf=0
+" 开启 YCM 标签补全引擎
+let g:ycm_collect_identifiers_from_tags_files=1
+" 引入 C++ 标准库tags
+set tags+=/data/misc/software/misc./vim/stdcpp.tags
+" YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
+inoremap <leader>, <C-x><C-o>
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+" 从第二个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=2
+" 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+" ****************************
+
+" +----+---------+  
+" |4.8 | 内容查找|
+" +----+---------+   
+" |4.9 | 内容替换|
+" +----+---------+ 
+
+" ******* Snippets 配置 ******
+" 补全代码片段的文件夹
+let g:UltiSnipsSnippetDirectories=["mysnippets"]
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+" ****************************
+
+" *********杂项配置***********
+" *.cpp 和 *.h 间切换
+nmap <silent> <Leader>sw :FSHere<cr>
+" ****************************
+
+
+" TODO: 5.3 只能补全
