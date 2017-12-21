@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  redis.test:
+    image: redis:latest
+    hostname: redis
+
+  # Django web server
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    hostname: web
+    command: ./run_web.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    links:
+      - redis.test
+
+  # Celery worker
+  worker:
+    build:
+      conte
