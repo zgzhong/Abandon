@@ -65,7 +65,7 @@ nmap <Leader><Space> %
 " ************UI 配置************
 " 配色方案
 set background=dark
-colorscheme molokai "solarized phd
+colorscheme solarized "molokai solarized phd
 " 开启行号
 set number
 " 开启语法高亮功能
@@ -206,7 +206,7 @@ let g:ycm_seed_identifiers_with_syntax=1
 " 补全代码片段的文件夹
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
-let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsExpandTrigger=";<tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 " ****************************
