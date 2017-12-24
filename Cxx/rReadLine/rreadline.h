@@ -7,7 +7,7 @@
 
 class ReversedLineFile{
 public:
-    const int64_t OFFSET_STEP = 1<<28;
+    const static int64_t OFFSET_STEP = 1<<20;
     ReversedLineFile(const std::string &fpath):m_filePath(fpath), m_fileOffset(0){}
     ~ReversedLineFile(void){
         close();
@@ -24,7 +24,9 @@ private:
     std::string              m_filePath;
     int64_t                  m_fileOffset;
     std::ifstream            m_file;
-    std::stack<std::string> m_buffer; 
+    std::stack<std::string>  m_lineStack; 
+
+    static char              m_buffer[OFFSET_STEP+1];
 };
 
 #endif

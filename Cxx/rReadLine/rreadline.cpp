@@ -9,6 +9,7 @@
 
 using namespace std;
 
+char ReversedLineFile::m_buffer[ReversedLineFile::OFFSET_STEP+1];
 
 bool ReversedLineFile::open(){
     if( access(m_filePath.c_str(), F_OK)==-1 ){
@@ -30,13 +31,13 @@ void ReversedLineFile::close(){
 }
 
 bool ReversedLineFile::readLine(string &line){
-    if (m_buffer.empty())
+    if (m_lineStack.empty())
         fillBuffer();
-    if (m_buffer.empty())
+    if (m_lineStack.empty())
         return false;
      
-    line = std::move(m_buffer.top());
-    m_buffer.pop();
+    line = std::move(m_lineStack.top());
+    m_lineStack.pop();
     return true;
 }
 
@@ -54,9 +55,11 @@ void ReversedLineFile::fillBuffer(){
         m_file.seekg(0, m_file.beg);
     
     m_fileOffset = m_file.tellg();
+    m_file.read(m_buffer, last_fileOffset - m_fileOffset);
+    m_buffer[last_fileOffset - m_fileOffset] = '\0'; 
+    istringstream iss(m_buffer);
     
-    while(m_file.tellg() < last_fileOffset){
-        getline(m_file, tempStr);
-        m_buffer.push(std::move(tempStr));
+    while(getline(iss, tempStr)){
+        m_lineStack.push(std::move(tempStr));
     }
 }

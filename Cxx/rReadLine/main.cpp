@@ -16,6 +16,7 @@ int main(int argc, char *argv[]){
     while(true){
         if (!f.readLine(s))
             break;
-        cout << s << endl;
+        cout << s << '\n';
     }
+    cout << endl;
 }
