@@ -15,17 +15,28 @@ const screenshot = async (browser, url, fname) =>{
     const page = await browser.newPage(); 
     // 模拟iPhone6p 的页面
     // await page.emulate(iPhone6p); 
-    await page.setViewport(PAGE_SIZE); 
+    await page.setViewport(PAGE_SIZE);
+    let status = 'OK'
 
     try {
-        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 20000});
+        console.log('DEBUG: visiting ' + url);
+        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 60000});
     } catch (err) {
-        console.log('ERROR: ' + err.message);
+        console.log(['ERROR:', err.message, url].join(' '));
+        status = err.message;
     }finally{
-        await page.waitFor(5000); //wait for 2 seconds
+        await page.waitFor(5000); //wait for 5 seconds
         await page.screenshot({path: fname});
+        
+        // 将映射关系写到文件
         let page_url = await page.url();
-        console.log('INFO: ' + [fname, url, page_url].join(' --> '));
+        let message = 'INFO: ' + [fname, status, url, page_url].join(' --> ') + '\n';
+        fs.appendFile('./log.txt', message, 'utf8',err =>{
+            if(err){  
+                console.log('ERROR: ' + err.message);  
+            }
+        });  
+
         await page.close();
     }    
 };
@@ -51,8 +62,8 @@ lineReading.on('close', function(){
                 await screenshot(browser, arr_url[i], "pictures/" + i + ".jpg");
                 resolve();
             }));
-            // every 100 url
-            if( i % 100 == 99){
+            // every 50 url
+            if( i % 50 == 49){
                 await Promise.all(promises).then(async values=>{
                     promises.length = 0;
                 }).catch(function (err){
