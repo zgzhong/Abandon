@@ -3,38 +3,45 @@ const devices = require('puppeteer/DeviceDescriptors');
 const readline = require('readline');
 const fs = require('fs');
 
-const iPhone = devices['iPhone6'];
-const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', headless: false};
+const iPhone6p = devices['iPhone 6 Plus'];
+// chrome 参数
+const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', args: ['disable-client-side-phishing-detection']};
 const PAGE_SIZE = {width:1280, height: 800};
 
-// 给定url和文件名
+/**
+ * 给定url和文件名, 对网页截图
+ */
 const screenshot = async (browser, url, fname) =>{
-    console.log(url);
-    const page = await browser.newPage();
-    
-    await page.setViewport(PAGE_SIZE);
+    const page = await browser.newPage(); 
+    // 模拟iPhone6p 的页面
+    // await page.emulate(iPhone6p); 
+    await page.setViewport(PAGE_SIZE); 
+
     try {
-        await page.goto(url, {waitUntil: 'domcontentloaded'});
-    } catch (error) {
-        console.log("visit pages failed: " + error.message);
+        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 20000});
+    } catch (err) {
+        console.log('ERROR: ' + err.message);
     }finally{
-        await page.waitFor(1000);
+        await page.waitFor(5000); //wait for 2 seconds
         await page.screenshot({path: fname});
+        let page_url = await page.url();
+        console.log('INFO: ' + [fname, url, page_url].join(' --> '));
         await page.close();
     }    
 };
 
 const lineReading = readline.createInterface({
-    // input: fs.createReadStream('phishing.txt')
-    input: fs.createReadStream('/home/zgzhong/VMshare/screenshot/urls/2/2.txt')
+    input: fs.createReadStream('phishing.txt')
 });
 
 let arr_url = [];
 
+// 读取url文件到数组中
 lineReading.on('line', line=>{
     arr_url.push(line);
 });
 
+// 读取完url, 调用浏览器截取网页
 lineReading.on('close', function(){
     puppeteer.launch(BROWSER_LOC).then(async browser=>{
         let promises = [];
@@ -44,20 +51,20 @@ lineReading.on('close', function(){
                 await screenshot(browser, arr_url[i], "pictures/" + i + ".jpg");
                 resolve();
             }));
-
-            if( i % 20 == 19){
+            // every 100 url
+            if( i % 100 == 99){
                 await Promise.all(promises).then(async values=>{
                     promises.length = 0;
-                }).catch(function (e){
-                    console.log(e);
+                }).catch(function (err){
+                    console.log('Error: ' + err.message);
                 });
             };
         };
 
         await Promise.all(promises).then(async values=>{
             await browser.close();            
-        }).catch(function (e){
-            console.log(e);
+        }).catch(function (err){
+            console.log('Error: ' + err.message);
         });
     });
 });
