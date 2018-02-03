@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const iPhone6p = devices['iPhone 6 Plus'];
 // chrome 参数
-const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', args: ['disable-client-side-phishing-detection']};
+const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', headless:false, ignoreHTTPSErrors: true, args: ['--disable-client-side-phishing-detection']};
 const PAGE_SIZE = {width:1280, height: 800};
 
 /**
@@ -20,7 +20,7 @@ const screenshot = async (browser, url, fname) =>{
 
     try {
         console.log('DEBUG: visiting ' + url);
-        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 60000});
+        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 30000});
     } catch (err) {
         console.log(['ERROR:', err.message, url].join(' '));
         status = err.message;
@@ -62,8 +62,8 @@ lineReading.on('close', function(){
                 await screenshot(browser, arr_url[i], "pictures/" + i + ".jpg");
                 resolve();
             }));
-            // every 50 url
-            if( i % 50 == 49){
+            // every 20 url
+            if( i % 20 == 19){
                 await Promise.all(promises).then(async values=>{
                     promises.length = 0;
                 }).catch(function (err){
