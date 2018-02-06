@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const iPhone6p = devices['iPhone 6 Plus'];
 // chrome 参数
-const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', headless:false, ignoreHTTPSErrors: true, args: ['--disable-client-side-phishing-detection']};
+const BROWSER_LOC = {executablePath:'/opt/google/chrome/chrome', ignoreHTTPSErrors: true, headless: true, args: ['--disable-client-side-phishing-detection']};
 const PAGE_SIZE = {width:1280, height: 800};
 
 /**
@@ -14,13 +14,15 @@ const PAGE_SIZE = {width:1280, height: 800};
 const screenshot = async (browser, url, fname) =>{
     const page = await browser.newPage(); 
     // 模拟iPhone6p 的页面
-    // await page.emulate(iPhone6p); 
+    // await page.emulate(iPhone6p);
+
+    // 设置页面的大小
     await page.setViewport(PAGE_SIZE);
     let status = 'OK'
 
     try {
         console.log('DEBUG: visiting ' + url);
-        await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 30000});
+        await page.goto(url);
     } catch (err) {
         console.log(['ERROR:', err.message, url].join(' '));
         status = err.message;
@@ -31,7 +33,7 @@ const screenshot = async (browser, url, fname) =>{
         // 将映射关系写到文件
         let page_url = await page.url();
         let message = 'INFO: ' + [fname, status, url, page_url].join(' --> ') + '\n';
-        fs.appendFile('./log.txt', message, 'utf8',err =>{
+        fs.appendFile('./log1.txt', message, 'utf8',err =>{
             if(err){  
                 console.log('ERROR: ' + err.message);  
             }
@@ -42,7 +44,7 @@ const screenshot = async (browser, url, fname) =>{
 };
 
 const lineReading = readline.createInterface({
-    input: fs.createReadStream('phishing.txt')
+    input: fs.createReadStream('/home/zgzhong/VMshare/screenshot/urls/shrinked')
 });
 
 let arr_url = [];
