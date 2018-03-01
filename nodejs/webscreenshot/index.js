@@ -37,10 +37,10 @@ const screenshot = async (browser, url, fname) =>{
             if(err){  
                 console.log('ERROR: ' + err.message);  
             }
-        });  
+        });
 
         await page.close();
-    }    
+    }
 };
 
 const lineReading = readline.createInterface({
@@ -61,8 +61,8 @@ lineReading.on('close', function(){
 
         for(let i=0; i<arr_url.length; ++i){
             promises.push(new Promise(async (resolve, reject) => {
-                await screenshot(browser, arr_url[i], "pictures/" + i + ".jpg");
-                resolve();
+                    await screenshot(browser, arr_url[i], "pictures/" + i + ".jpg");
+                resolve();  
             }));
             // every 20 url
             if( i % 20 == 19){
