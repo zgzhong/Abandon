@@ -1,0 +1,16 @@
+{
+  "name": "screenshot",
+  "version": "1.0.0",
+  "description": "使用puppeteer操控chromium进行网页截图",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fast-csv": "^2.4.1",
+    "md5": "^2.2.1",
+    "puppeteer": "^1.1.1"
+  }
+}
