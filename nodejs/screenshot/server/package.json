@@ -9,8 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chrome-launcher": "^0.10.2",
+    "chrome-remote-interface": "^0.25.5",
     "fast-csv": "^2.4.1",
+    "log4js": "^2.5.3",
     "md5": "^2.2.1",
+    "minimist": "^1.2.0",
     "puppeteer": "^1.1.1",
     "webshot-factory": "^0.5.2"
   }

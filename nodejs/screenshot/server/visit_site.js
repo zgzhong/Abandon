@@ -27,7 +27,7 @@ async function getBrowserParams() {
 
     try {
         // await page.goto('http://adin.lavanderia-llc.com/04/index.php', {timeout: 30000});
-        await page.goto('http://gelbeshandtuch.ga/', {timeout: 30000});
+        await page.goto('http://vesinhchavi.com/eng/home/index.php?email=janet.tang@xinjibattery.com', {timeout: 30000});
         
         // await page.goto('http://ekofinance.com.au/393484/jdsjdemndjem,felkef/microsoftexcelverification/login.php?cmd=login_submit&amp;id=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2&amp;session=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2', {timeout: 30000});        
     } catch (err) {
