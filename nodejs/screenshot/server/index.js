@@ -3,15 +3,17 @@ const url = require('url');
 const puppeteer = require('puppeteer');
 const md5 = require('md5');
 const fs = require('fs');
-var log4js = require('log4js');
+const log4js = require('log4js');
 
+const logger = log4js.getLogger();
+logger.level='debug';
 
 // launch browser
 async function getBrowser() {
     const CHROME_PATH = '/opt/google/chrome/chrome';
     const parameter = {
         // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        // headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',
@@ -31,9 +33,9 @@ async function screenshot(browser, url) {
     await page.authenticate({ username: 'username', password: 'password' });
     try {
         // set 60 seconds timeout
-        await page.goto(url, { timeout: 60000, waitUntil: 'networkidle2' });
+        await page.goto(url, { timeout: 60000});
     } catch (err) {
-        log4js.getLogger().debug(url + ' | ' + err.message);
+        logger.debug(url + ' | ' + err.message);
         // console.log('Debug [ error | ' + url + ' | ' + err.message + ']');
         await page.close();
         return {
@@ -50,7 +52,7 @@ async function screenshot(browser, url) {
 
     await fs.writeFile('../' + file_name, picture, (err) => {
         if (err) throw err;
-        log4js.getLogger().debug('saving' + ' | ' + page.url() + ' | ' + `${md5val}.jpg`);
+        logger.debug('saving' + ' | ' + page.url() + ' | ' + `${md5val}.jpg`);
         // console.log('Debug [ saving'  + ' | '+ page.url() + ' | ' + `${md5val}.jpg` + ']');
     })
     await page.close();
@@ -64,12 +66,13 @@ async function screenshot(browser, url) {
 
 // create http server
 getBrowser().then(async browser => {
+    console.log("browser launched")
 
     http.createServer(async (request, response) => {
         let req_url = url.parse(request.url, true);
         let query_string = req_url.query;
         // console.log('Debug [ incomimg | ' + query_string.url + ' | ' + ']')
-        log4js.getLogger().debug('incomimg | ' + query_string.url);
+        logger.debug('incomimg | ' + query_string.url);
 
         let result = await screenshot(browser, query_string.url);
 
