@@ -18,7 +18,7 @@ async function getBrowser() {
         args: [
             '--safebrowsing-disable-download-protection',
             '--safebrowsing-disable-extension-blacklist',
-            '--no-sandbox',
+            '--no-sandbox'
         ]
     };
 
@@ -29,22 +29,22 @@ async function getBrowser() {
 // take screenshot
 async function screenshot(browser, url) {
     const page = await browser.newPage();
-    await page.setViewport({ width: 1280, height: 800 })
+    await page.setViewport({ width: 1280, height: 800 });
     await page.authenticate({ username: 'username', password: 'password' });
     try {
         // set 60 seconds timeout
-        await page.goto(url, { timeout: 60000});
+        await page.goto(url, { timeout: 50000});
     } catch (err) {
         logger.debug(url + ' | ' + err.message);
-        // console.log('Debug [ error | ' + url + ' | ' + err.message + ']');
         await page.close();
         return {
             status: 'failed',
             reason: err.message,
-            url: url,
+            url: url
         };
     }
 
+    await page.waitFor(1000);
     let picture = await page.screenshot({ type: 'jpeg' });
     let landed_url = await page.url();
     let md5val = await md5(picture);
@@ -53,7 +53,6 @@ async function screenshot(browser, url) {
     await fs.writeFile('../' + file_name, picture, (err) => {
         if (err) throw err;
         logger.debug('saving' + ' | ' + page.url() + ' | ' + `${md5val}.jpg`);
-        // console.log('Debug [ saving'  + ' | '+ page.url() + ' | ' + `${md5val}.jpg` + ']');
     })
     await page.close();
     return {
@@ -66,7 +65,8 @@ async function screenshot(browser, url) {
 
 // create http server
 getBrowser().then(async browser => {
-    console.log("browser launched")
+    console.log("browser launched");
+    console.log("listening port: 8080");
 
     http.createServer(async (request, response) => {
         let req_url = url.parse(request.url, true);
