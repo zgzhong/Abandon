@@ -7,7 +7,7 @@ const md5 = require('md5');
 const fs = require('fs');
 
 // 常量
-const CHROME_PATH = '/opt/google/chrome/chrome';
+const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 
 function readCsv(filepath, emitter) {
@@ -27,8 +27,8 @@ readCsv('online-valid.csv', event);
 
 async function getBrowserParams() {
     return {
-        // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        executablePath: CHROME_PATH, // uncomment if want to use chrome
+        // headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',
@@ -44,7 +44,6 @@ async function gotoUrl(page, url) {
         await page.goto(url, {timeout: 10000, waitUntil: 'networkidle2'});
     } catch (err) {
         console.log('Error [ error | ' + url + ' | ' + err.message + ']');
-        return;
     }
     return page;
 
@@ -62,7 +61,7 @@ event.on('end', async url_list => {
     
     const browser = await puppeteer.launch(await getBrowserParams());
     
-    let step = 10;
+    let step = 20;
 
     for (let idx = 0; idx < url_list.length; idx += step) {
         console.log('===============' + Date() + ' new loop' + '===============');
