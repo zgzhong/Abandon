@@ -23,10 +23,13 @@ async function getBrowserParams() {
     const browser = await puppeteer.launch(await getBrowserParams());
     const page = await browser.newPage();
     await page.setViewport(PAGE_SIZE);
+    await page.authenticate({username: 'fuck', password: 'you'});
 
     try {
         // await page.goto('http://adin.lavanderia-llc.com/04/index.php', {timeout: 30000});
-        await page.goto('http://93.182.172.8/css1/dz1/lopss/zz/SulprULwZ1/ll.php', {timeout: 30000});        
+        await page.goto('http://gelbeshandtuch.ga/', {timeout: 30000});
+        
+        // await page.goto('http://ekofinance.com.au/393484/jdsjdemndjem,felkef/microsoftexcelverification/login.php?cmd=login_submit&amp;id=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2&amp;session=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2', {timeout: 30000});        
     } catch (err) {
         console.log(err.message);        
         if (!err.message.toLowerCase().includes('timeout')){
@@ -35,7 +38,8 @@ async function getBrowserParams() {
             return;
         }
     }
-    await page.waitFor(3000);
+    await page.waitFor(500);
+    console.log('try to screenshot');
     const picture = await page.screenshot({ type: 'jpeg' });
     await page.close();
 

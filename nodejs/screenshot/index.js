@@ -7,8 +7,7 @@ const md5 = require('md5');
 const fs = require('fs');
 
 // 常量
-const CHROME_PATH = '/opt/google/chrome/chrome';
-const PAGE_SIZE = { width: 1280, height: 800 };
+const CHROME_PATH = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
 
 function readCsv(filepath, emitter) {
@@ -28,46 +27,26 @@ readCsv('online-valid.csv', event);
 
 async function getBrowserParams() {
     return {
-        // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        executablePath: CHROME_PATH, // uncomment if want to use chrome
+        // headless: false,
         ignoreHTTPSErrors: true,
-        slowMo: 100,
         args: [
             '--safebrowsing-disable-download-protection',
             '--safebrowsing-disable-extension-blacklist',
+            '--no-sandbox',
         ]
     };
 };
 
-async function screenshot(browser, url, dirname) {
-    dirname = await dirname || './';
-    const page = await browser.newPage();
-    await page.setViewport(PAGE_SIZE);
-    let response
+async function gotoUrl(page, url) {        
     try {
-        response = await page.goto(url);
+        console.log('Debug [ goto | ' + url + ']');
+        await page.goto(url, {timeout: 10000, waitUntil: 'networkidle2'});
     } catch (err) {
-        console.log(err.message);
-        if (!err.message.toLowerCase().includes('timeout')) {
-            await page.close();
-            return `${url}: ${err.message}`;
-        }
+        console.log('Error [ error | ' + url + ' | ' + err.message + ']');
     }
-    if (response && !response.ok()) {
-        await page.close();
-        return `${url}: Not OK`;
-    }
+    return page;
 
-    await page.waitFor(5000);
-    const picture = await page.screenshot({ type: 'jpeg' });
-    await page.close();
-
-    const hashval = await md5(picture);
-    await fs.writeFile(`${dirname}${hashval}.jpg`, picture, (err) => {
-        if (err) throw err;
-        console.log(`OK: pic: ${hashval}.jpg | url: ${url}`);
-    });
-    return `${url}: ${hashval}.jpg`;
 };
 
 
@@ -79,25 +58,58 @@ event.on('end', async url_list => {
         console.error("Unhandled Rejection at: \n\tPromise", p, "\n\treason:", reason);
     });
 
+    
     const browser = await puppeteer.launch(await getBrowserParams());
+    
+    let step = 20;
 
-    let step = 10;
     for (let idx = 0; idx < url_list.length; idx += step) {
+        console.log('===============' + Date() + ' new loop' + '===============');
         let urls = url_list.slice(idx, idx + step);
 
+        let dirname = 'picture/';
+        
+        const page_pool = await Promise.all(new Array(step).fill({}).map(async function(){
+            let page = await browser.newPage();
+                await page.authenticate({username: 'fuck', password: 'you'});
+                return page;
+            })
+        );
 
-        let promises = urls.map(function (url) {
-            return new Promise(async function (resolve, reject) {
-                const result = await screenshot(browser, url, 'picture/');
-                resolve(result);
-            });
-        });
+        console.log('goto Url');
+        const pages = await Promise.all(page_pool.map(
+            async (page, idx) => {
+                return new Promise(async (resolve, reject)=>{
+                    const result = await gotoUrl(page, urls[idx]);
+                    resolve(result);
+                });
+            }
+        ));
 
-        const result = await Promise.all(promises).catch((err) => {
-            console.log(err.message);
-        });
-        console.log(result);
+        console.log('save screenshot');
+        const result = await Promise.all(pages.map(
+            async (page) =>{
+                if (typeof page == 'undefined'){
+                    return;
+                }
 
+                const picture = await page.screenshot({ type: 'jpeg' });
+                const hashval = await md5(picture);
+                
+                await fs.writeFile(`${dirname}${hashval}.jpg`, picture, (err) => {
+                    if (err) throw err;
+                    console.log('Debug [ saving'  + ' | '+ page.url() + ' | ' + `${hashval}.jpg` + ']');
+                });
+                return `${hashval}.jpg`;
+            }
+        ));
+
+        await Promise.all(page_pool.map(
+            async (page)=>{
+                await page.close();
+            }
+        ));
     };
+
     await browser.close();
 });
