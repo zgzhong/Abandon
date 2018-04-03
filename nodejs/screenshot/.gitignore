@@ -1,2 +1,10 @@
 .vscode/
-
+*.html
+*.png
+*.h5
+*.csv
+*.json
+.idea/
+model/
+result/
+urls/
