@@ -22,14 +22,29 @@ async function getBrowserParams() {
 (async () => {
     const browser = await puppeteer.launch(await getBrowserParams());
     const page = await browser.newPage();
+
+    page.on('response', response=>{
+        console.log('on response');
+        console.log(response.ok);
+    });
+
+    page.on('requestfinished', req=>{
+        console.log('request finished');
+    });
+
+    page.on('request', req=>{
+        console.log('send request');
+    });
+    
+    page.on('requestfailed', req=>{
+        console.log('request failed');
+    });
+
     await page.setViewport(PAGE_SIZE);
     await page.authenticate({username: 'fuck', password: 'you'});
 
     try {
-        // await page.goto('http://adin.lavanderia-llc.com/04/index.php', {timeout: 30000});
-        await page.goto('http://gelbeshandtuch.ga/', {timeout: 30000});
-        
-        // await page.goto('http://ekofinance.com.au/393484/jdsjdemndjem,felkef/microsoftexcelverification/login.php?cmd=login_submit&amp;id=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2&amp;session=a721d44360973f8964c7094f5e7882a2a721d44360973f8964c7094f5e7882a2', {timeout: 30000});        
+        await page.goto('http://quatangluuniemhue.com/ACH-FORM/OTL-7372377976509/', {timeout: 30000});
     } catch (err) {
         console.log(err.message);        
         if (!err.message.toLowerCase().includes('timeout')){

@@ -106,3 +106,5 @@ venv.bak/
 .mypy_cache/
 # mac OS hidden file
 .DS_Store
+
+.idea/
