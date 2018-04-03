@@ -104,7 +104,7 @@ async function extract_site_feature(browser, url) {
     }
 
     // get page content
-    const html = await page.text;
+    const html = await response.text();
 
     // screen shot
     let picture = await page.screenshot({ type: 'jpeg' });
@@ -146,7 +146,7 @@ async function extract_site_feature(browser, url) {
 
 function present_url(url) {
     if (url.length < 100){
-        return url.padEnd(100 - url.length, ' ');
+        return url.padEnd(100, ' ');
     }
-    return url.slice(0, 100).padEnd(3, '.');
+    return url.slice(0, 97).padEnd(100, '...');
 }
