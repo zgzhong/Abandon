@@ -104,4 +104,5 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-
+# mac OS hidden file
+.DS_Store
