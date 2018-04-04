@@ -14,7 +14,7 @@ async function getBrowser() {
     const CHROME_PATH = '/opt/google/chrome/chrome';
     const parameter = {
         // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        // headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',

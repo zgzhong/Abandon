@@ -21,7 +21,12 @@ def feature_extract_subproc(url_list, q, q_lock):
     for idx, item in enumerate(url_list):
         req = requests.get('http://localhost:8080', params={'url': item['url']})
         logging.info('visit: {}'.format(item['url']))
-        ret = req.json()
+        try:
+            ret = req.json()
+        except Exception as e:
+            logging.error(e)
+            continue
+
         if ret:
             q_lock.acquire()
             q.put({'phishtank': item, 'browser': ret})
