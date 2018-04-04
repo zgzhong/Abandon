@@ -45,6 +45,8 @@ class URLFeature(object):
         if port_index != -1:
             netloc = netloc[:port_index]
 
+        self.host = netloc
+
         logger.debug('The netloc: {}'.format(netloc))
 
         try:
