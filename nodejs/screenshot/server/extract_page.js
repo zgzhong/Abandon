@@ -14,7 +14,7 @@ async function getBrowser() {
     const CHROME_PATH = '/opt/google/chrome/chrome';
     const parameter = {
         // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        // headless: false,
+        //headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',
@@ -32,7 +32,6 @@ async function getBrowser() {
 getBrowser().then(async browser => {
     logger.info("Browser launched");
 
-
     // use query string to atain the url
     http.createServer(async (request, response) => {
         let req_url = url.parse(request.url, true);
@@ -45,13 +44,17 @@ getBrowser().then(async browser => {
         try {
             result = await extract_site_feature(browser, query_string.url);
         }catch(err){
-            logger.error('Error happened: ', err.reason, err.stack);
+            logger.warn(`Error happened: on ${query_string.url}`, err.reason, err.stack);
             result = {
                 status: 'error',
                 reason: err.reason,
                 trace: err.stack,
                 origin_url: query_string.url,
             };
+            response.writeHead(200, {'Content-Type': 'application/json'});
+            response.write(JSON.stringify(result));
+            response.end();
+            return;
         }
 
         response.writeHead(200, { 'Content-Type': 'application/json' });
@@ -75,7 +78,7 @@ async function extract_site_feature(browser, url) {
     try {
         response = await page.goto(url, { timeout: 60000, waitUntil: 'networkidle0' });
     } catch (err) {
-        logger.debug(`err.message: ${present_url(url)} => ${err.message}`);
+        logger.debug(`${err.message}: ${present_url(url)}`);
         await page.close();
         return {
             status: 'failed',
@@ -90,7 +93,8 @@ async function extract_site_feature(browser, url) {
     logger.debug(`Time spent: ${time_spent} ms.`);
 
     if (response == undefined){
-        logger.warn(`Navigate to about:blank => ${present_url(url)}`)
+        logger.debug(`Navigate to about:blank => ${present_url(url)}`);
+        logger.debug('close page');
         await page.close();
         return {
             status: 'failed',
@@ -100,10 +104,12 @@ async function extract_site_feature(browser, url) {
     }
     
     // get page status
+    logger.debug('get page status');
     const status_code = await response.status();
     const landed_url = await response.url();
 
     // get ca information
+    logger.debug('get ca information');
     const security_conn = await response.securityDetails();
     let ca_issuer = null;
     let ca_subject = null;
@@ -117,6 +123,7 @@ async function extract_site_feature(browser, url) {
     }
 
     // get icon link
+    logger.debug('get icon href');
     let icon_href = null;
     if (await page.$('link[rel*="icon"]')){
         const icon_href = await page.$eval('link[rel*="icon"]', icon=>icon.href);
@@ -126,12 +133,15 @@ async function extract_site_feature(browser, url) {
     }
 
     // get page content
+    logger.debug('get page html');
     const html = await response.text();
 
     // screen shot
+    logger.debug('take screenshot');
     let picture = await page.screenshot({ type: 'jpeg' });
     
     // store information
+    logger.debug('saving screenshot and html');
     let pic_md5 = await md5(picture);
     let url_md5 = await md5(url);
     let pic_name = `${pic_md5}_${url_md5}.jpg`;
@@ -149,6 +159,7 @@ async function extract_site_feature(browser, url) {
         logger.info(`Saved ${present_url(url)} to => ${html_path}}`);
     });
 
+    logger.debug('close page');
     await page.close();
     return {
         'status': 'success',
@@ -170,5 +181,5 @@ function present_url(url) {
     if (url.length < 100){
         return url.padEnd(100, ' ');
     }
-    return url.slice(0, 97).padEnd(100, '...');
+    return url.slice(0, 97).padEnd(100, '.');
 }

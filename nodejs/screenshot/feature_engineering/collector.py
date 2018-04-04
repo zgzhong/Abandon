@@ -19,14 +19,14 @@ logging.basicConfig(
 
 def feature_extract_subproc(url_list, q, q_lock):
     for idx, item in enumerate(url_list):
-        req = requests.get('http://localhost:8080', params={'url': item['url']})
-        logging.info('visit: {}'.format(item['url']))
         try:
-            ret = req.json()
+            logging.info('visit: {}'.format(item['url']))
+            req = requests.get('http://localhost:8080', params={'url': item['url']})
         except Exception as e:
             logging.error('Error happened when visit {}'.format(item['url']))
             continue
 
+        ret = req.json()
         if ret:
             q_lock.acquire()
             q.put({'phishtank': item, 'browser': ret})
