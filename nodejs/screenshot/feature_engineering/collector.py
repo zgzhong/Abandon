@@ -24,7 +24,7 @@ def feature_extract_subproc(url_list, q, q_lock):
         try:
             ret = req.json()
         except Exception as e:
-            logging.error(e)
+            logging.error('Error happened when visit {}'.format(item['url']))
             continue
 
         if ret:
