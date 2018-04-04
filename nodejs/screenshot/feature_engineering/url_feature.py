@@ -22,7 +22,7 @@ class URLFeature(object):
         self.url_len = len(self.url)
         self.at_symbol = '@' in self.url
         self.domain_dash_cnt = Counter(self.url_splited)['-']
-        self.domain_seg_num = len(self.url_splited.split('.')) if self.use_ip else None
+        self.domain_seg_num = len(self.url_splited.netloc.split('.')) if self.use_ip else None
 
         if self.url_splited.scheme == 'https':
             self.double_slash_redirect = (self.url.rfind('//') > 6)
@@ -44,6 +44,8 @@ class URLFeature(object):
         port_index = netloc.rfind(':')
         if port_index != -1:
             netloc = netloc[:port_index]
+
+        self.host = netloc
 
         logger.debug('The netloc: {}'.format(netloc))
 

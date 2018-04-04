@@ -14,7 +14,7 @@ async function getBrowser() {
     const CHROME_PATH = '/opt/google/chrome/chrome';
     const parameter = {
         // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        // headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',
@@ -39,8 +39,20 @@ getBrowser().then(async browser => {
         let query_string = req_url.query;
 
         logger.info('incomimg  | ' + query_string.url);
+        
+        let result;
 
-        let result = await extract_site_feature(browser, query_string.url);
+        try {
+            result = await extract_site_feature(browser, query_string.url);
+        }catch(err){
+            logger.error('Error happened: ', err.reason, err.stack);
+            result = {
+                status: 'error',
+                reason: err.reason,
+                trace: err.stack,
+                origin_url: query_string.url,
+            };
+        }
 
         response.writeHead(200, { 'Content-Type': 'application/json' });
         response.write(JSON.stringify(result));
@@ -59,16 +71,16 @@ async function extract_site_feature(browser, url) {
     const time_beg = new Date();
     logger.debug(`Begin visit: ${url}`)
 
-    let response = null;
+    let response;
     try {
-        response = await page.goto(url, { timeout: 60000, waitUntil: 'networkidle2' });
+        response = await page.goto(url, { timeout: 60000, waitUntil: 'networkidle0' });
     } catch (err) {
-        logger.debug(`err.message: ${present_url}`);
+        logger.debug(`err.message: ${present_url(url)} => ${err.message}`);
         await page.close();
         return {
             status: 'failed',
             reason: err.message,
-            url: url
+            origin_url: url
         };
     }
 
@@ -77,6 +89,16 @@ async function extract_site_feature(browser, url) {
     logger.debug(`End visit: ${url}`);
     logger.debug(`Time spent: ${time_spent} ms.`);
 
+    if (response == undefined){
+        logger.warn(`Navigate to about:blank => ${present_url(url)}`)
+        await page.close();
+        return {
+            status: 'failed',
+            reaseon: 'navigate to about:blank',
+            origin_url: url,
+        };
+    }
+    
     // get page status
     const status_code = await response.status();
     const landed_url = await response.url();
@@ -104,7 +126,7 @@ async function extract_site_feature(browser, url) {
     }
 
     // get page content
-    const html = await page.text;
+    const html = await response.text();
 
     // screen shot
     let picture = await page.screenshot({ type: 'jpeg' });
@@ -140,13 +162,13 @@ async function extract_site_feature(browser, url) {
         'ca_valid_to': ca_valid_to,
         'icon_href': icon_href,
         'fpath': pic_path,
-        'html': html,
+        'html': html_path,
     };
 };
 
 function present_url(url) {
     if (url.length < 100){
-        return url.padEnd(100 - url.length, ' ');
+        return url.padEnd(100, ' ');
     }
-    return url.slice(0, 100).padEnd(3, '.');
+    return url.slice(0, 97).padEnd(100, '...');
 }
