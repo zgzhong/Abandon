@@ -1,25 +1,20 @@
 import tensorflow as tf
 import tensorlayer as tl
 
-# from train import train_network
 
-
-
-
-def build_network1(input):
+def build_cnn(input):
     # define network
     network = tl.layers.InputLayer(input, name='input_layer')
-    network = tl.layers.Conv2d(network, 16, (3, 3), (1, 1), name='conv1')
-    network = tl.layers.Conv2d(network, 16, (3, 3), (1, 1), name='conv2', act=tf.nn.relu)
+    network = tl.layers.Conv2d(network, 16, (3, 3), (1, 1), padding='VALID', name='conv1', act=tf.nn.relu)
     network = tl.layers.MaxPool2d(network, (2, 2), (2, 2), padding='VALID', name='pool1')
-    network = tl.layers.Conv2d(network, 16, (3, 3), (1, 1), name='conv3', act=tf.nn.relu)
+    network = tl.layers.Conv2d(network, 16, (3, 3), (1, 1), padding='VALID', name='conv2', act=tf.nn.relu)
     network = tl.layers.MaxPool2d(network, (2, 2), (2, 2), padding='VALID', name='pool2')
     network = tl.layers.FlattenLayer(network, name='flatten')
     network = tl.layers.DenseLayer(network, n_units=10, name='dense2')
     return network
 
 
-def build_network2(input):
+def build_sep_cnn(input):
     # define network
     network = tl.layers.InputLayer(input, name='input_layer')
     network = tl.layers.Conv2d(network, 8, (3, 3), (1, 1), padding='VALID', name='conv1')
@@ -43,15 +38,13 @@ def build_network2(input):
     return network
 
 
-if __name__ == '__main__':
-    # prepare data
+def train_model(network_f, model_name):
     X_train, y_train, X_val, y_val, X_test, y_test = tl.files.load_mnist_dataset(shape=(-1, 28, 28, 1))
-    sess = tf.Session()
 
     x = tf.placeholder(dtype=tf.float32, shape=(None, 28, 28, 1), name='x')
     y_ = tf.placeholder(dtype=tf.int64, shape=(None,), name='y_')
 
-    network = build_network2(x)
+    network = network_f(x)
     y = network.outputs
 
     # define cost function and metric.
@@ -65,6 +58,8 @@ if __name__ == '__main__':
     train_op = tf.train.AdamOptimizer(learning_rate=0.0001, beta1=0.9, beta2=0.999,
                                       epsilon=1e-08, use_locking=False).minimize(cost, var_list=train_params)
 
+
+    sess = tf.Session()
     tl.layers.initialize_global_variables(sess)
 
     # print network information
@@ -77,8 +72,13 @@ if __name__ == '__main__':
                  X_val=X_val, y_val=y_val, eval_train=False)
 
     # evaluation
-    tl.utils.test(sess, network, acc, X_test, y_test, x, y_, batch_size=None, cost=cost)
+    tl.utils.test(sess, network, acc, X_test, y_test, x, y_, batch_size=200, cost=cost)
 
     # save the network to .npz file
-    tl.files.save_npz(network.all_params, name='model_sep_cnn.npz', sess=sess)
+    tl.files.save_npz(network.all_params, name=model_name, sess=sess)
     sess.close()
+
+
+if __name__ == '__main__':
+    train_model(build_sep_cnn, 'model_sep_cnn.npz')
+    train_model(build_cnn, 'model_cnn.npz')
