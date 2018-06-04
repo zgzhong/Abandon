@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/clang++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/client.dir/client.cc.o CMakeFiles/client.dir/peer.cc.o  -o client 
