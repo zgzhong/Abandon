@@ -14,7 +14,7 @@ async function getBrowser() {
     const CHROME_PATH = '/opt/google/chrome/chrome';
     const parameter = {
         // executablePath: CHROME_PATH, // uncomment if want to use chrome
-        headless: false,
+        //headless: false,
         ignoreHTTPSErrors: true,
         args: [
             '--safebrowsing-disable-download-protection',
@@ -32,15 +32,30 @@ async function getBrowser() {
 getBrowser().then(async browser => {
     logger.info("Browser launched");
 
-
     // use query string to atain the url
     http.createServer(async (request, response) => {
         let req_url = url.parse(request.url, true);
         let query_string = req_url.query;
 
         logger.info('incomimg  | ' + query_string.url);
+        
+        let result;
 
-        let result = await extract_site_feature(browser, query_string.url);
+        try {
+            result = await extract_site_feature(browser, query_string.url);
+        }catch(err){
+            logger.warn(`Error happened: on ${query_string.url}`, err.reason, err.stack);
+            result = {
+                status: 'error',
+                reason: err.reason,
+                trace: err.stack,
+                origin_url: query_string.url,
+            };
+            response.writeHead(200, {'Content-Type': 'application/json'});
+            response.write(JSON.stringify(result));
+            response.end();
+            return;
+        }
 
         response.writeHead(200, { 'Content-Type': 'application/json' });
         response.write(JSON.stringify(result));
@@ -59,16 +74,16 @@ async function extract_site_feature(browser, url) {
     const time_beg = new Date();
     logger.debug(`Begin visit: ${url}`)
 
-    let response = null;
+    let response;
     try {
-        response = await page.goto(url, { timeout: 60000, waitUntil: 'networkidle2' });
+        response = await page.goto(url, { timeout: 60000, waitUntil: 'networkidle0' });
     } catch (err) {
-        logger.debug(`err.message: ${present_url}`);
+        logger.debug(`${err.message}: ${present_url(url)}`);
         await page.close();
         return {
             status: 'failed',
             reason: err.message,
-            url: url
+            origin_url: url
         };
     }
 
@@ -77,11 +92,24 @@ async function extract_site_feature(browser, url) {
     logger.debug(`End visit: ${url}`);
     logger.debug(`Time spent: ${time_spent} ms.`);
 
+    if (response == undefined){
+        logger.debug(`Navigate to about:blank => ${present_url(url)}`);
+        logger.debug('close page');
+        await page.close();
+        return {
+            status: 'failed',
+            reaseon: 'navigate to about:blank',
+            origin_url: url,
+        };
+    }
+    
     // get page status
+    logger.debug('get page status');
     const status_code = await response.status();
     const landed_url = await response.url();
 
     // get ca information
+    logger.debug('get ca information');
     const security_conn = await response.securityDetails();
     let ca_issuer = null;
     let ca_subject = null;
@@ -95,6 +123,7 @@ async function extract_site_feature(browser, url) {
     }
 
     // get icon link
+    logger.debug('get icon href');
     let icon_href = null;
     if (await page.$('link[rel*="icon"]')){
         const icon_href = await page.$eval('link[rel*="icon"]', icon=>icon.href);
@@ -104,12 +133,15 @@ async function extract_site_feature(browser, url) {
     }
 
     // get page content
-    const html = await page.text;
+    logger.debug('get page html');
+    const html = await response.text();
 
     // screen shot
+    logger.debug('take screenshot');
     let picture = await page.screenshot({ type: 'jpeg' });
     
     // store information
+    logger.debug('saving screenshot and html');
     let pic_md5 = await md5(picture);
     let url_md5 = await md5(url);
     let pic_name = `${pic_md5}_${url_md5}.jpg`;
@@ -127,6 +159,7 @@ async function extract_site_feature(browser, url) {
         logger.info(`Saved ${present_url(url)} to => ${html_path}}`);
     });
 
+    logger.debug('close page');
     await page.close();
     return {
         'status': 'success',
@@ -140,13 +173,13 @@ async function extract_site_feature(browser, url) {
         'ca_valid_to': ca_valid_to,
         'icon_href': icon_href,
         'fpath': pic_path,
-        'html': html,
+        'html': html_path,
     };
 };
 
 function present_url(url) {
     if (url.length < 100){
-        return url.padEnd(100 - url.length, ' ');
+        return url.padEnd(100, ' ');
     }
-    return url.slice(0, 100).padEnd(3, '.');
+    return url.slice(0, 97).padEnd(100, '.');
 }
