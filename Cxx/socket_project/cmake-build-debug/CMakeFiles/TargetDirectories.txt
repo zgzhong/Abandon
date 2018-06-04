@@ -1,0 +1,8 @@
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/serverC.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/serverB.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/serverA.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/monitor.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/aws.dir
+/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/CMakeFiles/client.dir

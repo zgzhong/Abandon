@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="socket_project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverC">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverC" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverC"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverC/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverC" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverC/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverB">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverB" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverB"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverB/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverB" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverB/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverA">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverA" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverA"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="serverA/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/serverA" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 serverA/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="monitor">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/monitor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 monitor"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="monitor/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/monitor" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 monitor/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="aws">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/aws" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 aws"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="aws/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/aws" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 aws/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 client"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client/fast">
+				<Option output="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/9.1.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 client/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/lisupy/Abandon/Cxx/socket_project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/aws.cc">
+			<Option target="aws"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/aws.h">
+			<Option target="aws"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/backend_util.h">
+			<Option target="serverC"/>
+			<Option target="serverB"/>
+			<Option target="serverA"/>
+			<Option target="aws"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/client.cc">
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/global.h">
+			<Option target="serverC"/>
+			<Option target="serverB"/>
+			<Option target="serverA"/>
+			<Option target="monitor"/>
+			<Option target="aws"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/monitor.cc">
+			<Option target="monitor"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/peer.cc">
+			<Option target="serverC"/>
+			<Option target="serverB"/>
+			<Option target="serverA"/>
+			<Option target="monitor"/>
+			<Option target="aws"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/peer.h">
+			<Option target="serverC"/>
+			<Option target="serverB"/>
+			<Option target="serverA"/>
+			<Option target="monitor"/>
+			<Option target="aws"/>
+			<Option target="client"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/serverA.cc">
+			<Option target="serverA"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/serverB.cc">
+			<Option target="serverB"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/serverC.cc">
+			<Option target="serverC"/>
+		</Unit>
+		<Unit filename="/Users/lisupy/Abandon/Cxx/socket_project/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
