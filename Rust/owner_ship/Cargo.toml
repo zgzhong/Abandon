@@ -1,0 +1,6 @@
+[package]
+name = "owner_ship"
+version = "0.1.0"
+authors = ["钟泽耿 <zhong550413470@gmail.com>"]
+
+[dependencies]
